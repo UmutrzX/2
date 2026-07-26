@@ -5,15 +5,11 @@
  */
 
 export const siteConfig = {
-    // ==========================================
-    // BÖLÜM 1: GENEL BİLGİLER VE İLETİŞİM
-    // ==========================================
     contact: {
         logoSrc: "https://i.pinimg.com/736x/4e/f6/25/4ef625ad3564670a75e74be775fac392.jpg",
         address: "Sakarya, Türkiye",
         phone: "+90 507 880 76 07", 
         email: "info@kartechpanel.com",
-        
         social: { 
             facebook: "#", 
             youtube: "#", 
@@ -21,9 +17,6 @@ export const siteConfig = {
         }
     },
 
-    // ==========================================
-    // BÖLÜM 2: ANA SAYFA (HERO) AYARLARI
-    // ==========================================
     homeHero: {
         backgroundImage: "https://i.pinimg.com/1200x/bd/20/dd/bd20ddd04e4e1cac3fb9a6b88958749d.jpg",
         slogan: {
@@ -36,9 +29,7 @@ export const siteConfig = {
         }
     },
 
-    // ==========================================
-    // BÖLÜM 3: FİLTRE KATEGORİLERİ 
-    // ==========================================
+    // Categories are defined independently for the project pages
     categories: {
         "ev-modelleri": [
             { id: "ev-standart", tr: "Standart Evler", en: "Standard Houses" },
@@ -57,9 +48,6 @@ export const siteConfig = {
         ]
     },
 
-    // ==========================================
-    // BÖLÜM 4: PROJELER 
-    // ==========================================
     projects: [
         {
             id: "dubleks-298", 
@@ -74,8 +62,8 @@ export const siteConfig = {
                 "https://i.pinimg.com/736x/4f/4e/11/4f4e11dbabea7f52a2425b3d04505b60.jpg"
             ],
             description: {
-                tr: "Kartech Panel kalitesiyle tasarlanmış modern iki katlı dubleks proje. Geniş pencereleri ve ferah tasarımı ile lüks bir yaşam sunar.",
-                en: "Modern two-story duplex SIP panel project designed with Kartech Panel quality."
+                tr: "Kartech Panel kalitesiyle tasarlanmış modern iki katlı dubleks proje.",
+                en: "Modern two-story duplex SIP panel project."
             }
         },
         {
@@ -88,8 +76,8 @@ export const siteConfig = {
             mainImage: "https://i.pinimg.com/736x/b3/fc/38/b3fc3888aecdcc57cd78193d31f7bd46.jpg",
             gallery: ["https://i.pinimg.com/1200x/be/d6/bf/bed6bfbffcea556193c1a2b9c7ce4b92.jpg"],
             description: {
-                tr: "Doğa ile iç içe yaşam sunan şık ve kullanışlı bir ev tasarımı. Enerji verimliliği yüksek, kurulumu oldukça hızlıdır.",
-                en: "A stylish and useful house design offering a life intertwined with nature."
+                tr: "Doğa ile iç içe yaşam sunan şık ve kullanışlı bir ev tasarımı.",
+                en: "A stylish and useful house design."
             }
         },
         {
@@ -99,9 +87,9 @@ export const siteConfig = {
             area: 25, rooms: 1,
             pageMenu: "bahce-yapilari", 
             categoryId: "by-kisbahcesi",
-            mainImage: "https://i.pinimg.com/736x/4f/4e/11/4f4e11dbabea7f52a2425b3d04505b60.jpg",
+            mainImage: "https://placehold.co/800x600/1a1a1a/FFF?text=Kış+Bahçesi",
             gallery: [],
-            description: { tr: "Dört mevsim bahçe keyfi sürebileceğiniz özel yalıtımlı yapı sistemimiz.", en: "Special insulated structure system to enjoy your garden all four seasons." }
+            description: { tr: "Dört mevsim bahçe keyfi.", en: "Enjoy your garden in all seasons." }
         },
         {
             id: "garaj-1",
@@ -110,15 +98,12 @@ export const siteConfig = {
             area: 40, rooms: 1,
             pageMenu: "garaj-sistemleri", 
             categoryId: "gs-ciftkapali",
-            mainImage: "https://i.pinimg.com/1200x/bd/20/dd/bd20ddd04e4e1cac3fb9a6b88958749d.jpg",
+            mainImage: "https://placehold.co/800x600/2ecc71/FFF?text=Garaj+Projesi",
             gallery: [],
-            description: { tr: "Araçlarınız için yüksek yalıtımlı, güvenli SİP panel garaj çözümü.", en: "Secure, highly insulated SIP panel garage solution for your vehicles." }
+            description: { tr: "Araçlarınız için güvenli SİP panel garaj.", en: "Secure SIP panel garage for your vehicles." }
         }
     ],
 
-    // ==========================================
-    // BÖLÜM 5: ÇEVİRİLER VE SAYFA YAZILARI
-    // ==========================================
     i18n: {
         tr: {
             menu: {
@@ -156,10 +141,10 @@ export const siteConfig = {
             
             pageContents: {
                 "sip-panel-intro": `
-                    <div class="text-left max-w-4xl mb-16">
-                        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Geleceğin Yapı Teknolojisi</h2>
-                        <p class="text-xl text-gray-600 leading-relaxed font-medium">SİP (Yapısal Yalıtımlı Panel) teknolojisi ile evlerinizi hem daha hızlı inşa ediyor hem de maksimum enerji tasarrufu sağlıyoruz. Kartech Panel Structures House Systems güvencesiyle lüksü doğayla buluşturuyoruz.</p>
-                        <div class="mt-8 w-24 h-1.5 bg-brand-orange rounded-full"></div>
+                    <div class="text-left max-w-4xl mx-auto mb-16 px-4">
+                        <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Geleceğin Yapı Teknolojisi</h2>
+                        <p class="text-lg md:text-xl text-gray-600 leading-relaxed font-medium">SİP (Yapısal Yalıtımlı Panel) teknolojisi ile evlerinizi hem daha hızlı inşa ediyor hem de maksimum enerji tasarrufu sağlıyoruz. Kartech Panel tecrübemizi doğayla buluşturuyoruz.</p>
+                        <div class="mt-6 w-20 h-1.5 bg-brand-orange rounded-full"></div>
                     </div>
                 `,
                 
@@ -191,10 +176,10 @@ export const siteConfig = {
             },
             pageContents: {
                 "sip-panel-intro": `
-                    <div class="text-left max-w-4xl mb-16">
-                        <h2 class="text-4xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Future Building Technology</h2>
-                        <p class="text-xl text-gray-600 leading-relaxed font-medium">We build your homes faster and provide maximum energy savings with SIP technology. Kartech Panel Structures House Systems brings luxury together with nature.</p>
-                        <div class="mt-8 w-24 h-1.5 bg-brand-orange rounded-full"></div>
+                    <div class="text-left max-w-4xl mx-auto mb-16 px-4">
+                        <h2 class="text-3xl md:text-5xl font-black text-gray-900 mb-6 tracking-tight">Future Building Technology</h2>
+                        <p class="text-lg md:text-xl text-gray-600 leading-relaxed font-medium">We build your homes faster and provide maximum energy savings with SIP technology.</p>
+                        <div class="mt-6 w-20 h-1.5 bg-brand-orange rounded-full"></div>
                     </div>
                 `,
                 "uretim": "<p class='text-xl break-words'>Information about our production facility.</p>",
