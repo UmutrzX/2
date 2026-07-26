@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kartech Panel Structures House Systems - Lüks ve Minimalizmin Birleşimi</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            orange: '#f39c12',
+                            dark: '#0a0a0a',
+                            light: '#f8f9fa',
+                            gray: '#e5e7eb',
+                            green: '#2ecc71' 
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; color: #333; overflow-x: hidden; }
+        body.menu-open { overflow: hidden; height: 100vh; }
+        
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .break-words { overflow-wrap: break-word; word-wrap: break-word; hyphens: auto; }
+        
+        .project-card { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
+        
+        .btn-press { transition: all 0.15s ease; cursor: pointer; }
+        .btn-press:active { transform: scale(0.92); }
+        
+        .floating-btn {
+            position: fixed; z-index: 50;
+            width: 55px; height: 55px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 24px; box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+        }
+        .floating-btn:hover { transform: scale(1.1) rotate(5deg); }
+        .floating-btn:active { transform: scale(0.9); }
+        .btn-call { left: 20px; bottom: 20px; background-color: #f39c12; }
+        
+        .btn-chat { right: 20px; bottom: 85px; background-color: #25D366; z-index: 51; }
+        
+        @media (min-width: 768px) {
+            .btn-call { bottom: 30px; left: 30px; }
+            .btn-chat { bottom: 30px; right: 30px; }
+        }
+
+        .btn-scroll-top { 
+            right: 20px; bottom: 150px;
+            background-color: #0a0a0a; 
+            opacity: 0; visibility: hidden; 
+            transform: translateY(20px);
+            width: 45px; height: 45px; font-size: 18px;
+            z-index: 50; 
+        }
+        @media (min-width: 768px) { .btn-scroll-top { right: 35px; bottom: 100px; width: 50px; height: 50px;} }
+        .btn-scroll-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+        .btn-scroll-top:hover { background-color: #2ecc71; }
+
+        #app-content { transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out; }
+        .page-fade-out { opacity: 0; transform: translateY(20px); }
+        .page-fade-in { opacity: 1; transform: translateY(0); }
+
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8); display: none;
+            align-items: center; justify-content: center; z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+        .modal-overlay.active { display: flex; }
+
+        #toast-message {
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px);
+            background: #0a0a0a; color: white; padding: 16px 32px;
+            border-radius: 50px; font-weight: 600; font-size: 14px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s;
+            opacity: 0; z-index: 1100; pointer-events: none;
+        }
+        #toast-message.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        #lightbox-overlay {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; opacity: 0; visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        #lightbox-overlay.active { opacity: 1; visibility: visible; }
+        #lightbox-img {
+            max-width: 95vw; max-height: 90vh; object-fit: contain;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            transform: scale(0.9); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        #lightbox-overlay.active #lightbox-img { transform: scale(1); }
+        .lightbox-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.1); color: white;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 24px; cursor: pointer; transition: all 0.2s ease;
+        }
+        .lightbox-btn:hover { background: #2ecc71; scale: 1.1; border: none; }
+        .lightbox-btn:active { scale: 0.9; }
+        #lightbox-prev { left: 20px; }
+        #lightbox-next { right: 20px; }
+        #lightbox-close {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(255,255,255,0.1); color: white;
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 20px; cursor: pointer; transition: all 0.2s ease;
+        }
+        #lightbox-close:hover { background: #e74c3c; transform: rotate(90deg); }
+        .lightbox-counter {
+            position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+            color: white; font-size: 15px; font-weight: 600; letter-spacing: 1px;
+            background: rgba(0,0,0,0.7); padding: 8px 24px; border-radius: 30px;
+        }
+
+        .vg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #0a0a0a;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto; 
+        }
+        .vg-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
+            opacity: 0;
+        }
+        
+        .accordion-content.open {
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            transition: color 0.3s ease;
+        }
+    </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+
+    <header id="main-header" class="bg-transparent fixed top-0 w-full z-40 transition-all duration-300 h-[80px]"></header>
+
+    <main id="app-content" class="flex-grow w-full page-fade-in bg-white"></main>
+
+    <footer id="main-footer" class="bg-brand-dark text-white py-16 mt-auto"></footer>
+
+    <a id="btn-call-floating" href="tel:+905078807607" class="floating-btn btn-call btn-press" title="Bizi Arayın"><i class="fas fa-phone-alt"></i></a>
+    <a id="btn-chat-floating" href="https://wa.me/905078807607" target="_blank" class="floating-btn btn-chat btn-press" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+    
+    <button id="btn-scroll-top" class="floating-btn btn-scroll-top btn-press transition-all duration-300" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Yukarı Çık">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="alert-modal" class="modal-overlay">
+        <div class="bg-white p-12 rounded-sm shadow-2xl max-w-sm w-full mx-4 text-center transform scale-95 transition-transform duration-300">
+            <i class="fas fa-check-circle text-7xl text-brand-green mb-6"></i>
+            <h3 id="modal-title" class="text-3xl font-black text-gray-900 mb-2 tracking-tight">Harika!</h3>
+            <p id="modal-message" class="text-gray-500 mb-8 text-lg leading-relaxed">Talebiniz başarıyla alındı. Müşteri temsilcimiz sizinle en kısa sürede iletişime geçecektir.</p>
+            <button onclick="document.getElementById('alert-modal').classList.remove('active')" class="btn-press bg-brand-green text-white px-8 py-4 rounded-full font-bold hover:bg-green-600 w-full text-lg shadow-md transition-colors">Tamam</button>
+        </div>
+    </div>
+
+    <div id="toast-message"><i class="fas fa-info-circle mr-2 text-brand-green"></i>İşlem başarılı</div>
+
+    <div id="lightbox-overlay">
+        <button id="lightbox-close" class="btn-press" onclick="window.closeLightbox()"><i class="fas fa-times"></i></button>
+        <button id="lightbox-prev" class="lightbox-btn btn-press" onclick="window.changeLightboxImage(-1)"><i class="fas fa-chevron-left"></i></button>
+        <img id="lightbox-img" src="" alt="Tam Ekran Görsel">
+        <button id="lightbox-next" class="lightbox-btn btn-press" onclick="window.changeLightboxImage(1)"><i class="fas fa-chevron-right"></i></button>
+        <div id="lightbox-counter" class="lightbox-counter">1 / 1</div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('btn-scroll-top');
+            if (window.scrollY > 400) btn.classList.add('visible');
+            else btn.classList.remove('visible');
+
+            const header = document.getElementById('main-header');
+            if (window.scrollY > 50) {
+                header.classList.remove('bg-transparent');
+                header.classList.add('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
+                
+                const socialIcons = header.querySelectorAll('.social-icons a');
+                socialIcons.forEach(icon => {
+                    icon.classList.remove('text-white');
+                    icon.classList.add('text-gray-600');
+                });
+            } else {
+                header.classList.add('bg-transparent');
+                header.classList.remove('bg-white/95', 'backdrop-blur-md', 'shadow-sm');
+                
+                if(window.state && window.state.currentView === 'sip-panel') {
+                    const socialIcons = header.querySelectorAll('.social-icons a');
+                    socialIcons.forEach(icon => {
+                        icon.classList.remove('text-gray-600');
+                        icon.classList.add('text-white');
+                    });
+                } else {
+                    const socialIcons = header.querySelectorAll('.social-icons a');
+                    socialIcons.forEach(icon => {
+                        icon.classList.remove('text-white');
+                        icon.classList.add('text-gray-600');
+                    });
+                }
+            }
+        });
+    </script>
+    <script type="module" src="app.js"></script>
+</body>
+</html>
